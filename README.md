@@ -14,8 +14,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Authors
-Mateusz Sławomir Lach ( matlak, msl )
+Mateusz Sławomir Lach ( matlak, msl ), 
 Damian Marciniak
 
+# Modified by
+Quentin Le Goff, Yassine Cherif
 # Keywords
-Java, Swing, JUnit,Logger
+Java, Swing, JUnit, Logger
