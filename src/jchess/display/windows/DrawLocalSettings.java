@@ -18,14 +18,20 @@ package jchess.display.windows;
 import jchess.JChessApp;
 import jchess.core.Game;
 import jchess.core.Player;
+
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.TextListener;
 import java.awt.event.TextEvent;
 import java.awt.*;
+
 import javax.swing.text.BadLocationException;
+
 import jchess.utils.Settings;
+import jchess.utils.Time;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -55,17 +61,15 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
     Container cont;
     JSeparator sep;
     JButton okButton;
-    JCheckBox timeGame;
-    JComboBox time4Game;
+
     String colors[] =
     {
         Settings.lang("white"), Settings.lang("black")
     };
     
-    String times[] =
-    {
-        "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120"
-    };
+    //Ajout d'une classe Time permettant les réglages du temps de partie
+    
+    Time time;
         
     /** 
      * Method witch is checking correction of edit tables
@@ -143,7 +147,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
             }
             
             JChessApp.demarrerJeu(this.firstName.getText(), this.secondName.getText(), color.getActionCommand().equals("biaÅ‚y"), oponentComp.isSelected(), 
-            		upsideDown.isSelected(), timeGame.isSelected(), times[time4Game.getSelectedIndex()], time4Game.getActionCommand(), parent);
+            		upsideDown.isSelected(), time.getTimeGame().isSelected(), time.getTimes()[time.getTime4Game().getSelectedIndex()], time.getTime4Game().getActionCommand(), parent);
             
             
         }
@@ -170,8 +174,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
         this.oponentChoos = new ButtonGroup();
         this.computerLevel = new JSlider();
         this.upsideDown = new JCheckBox(Settings.lang("upside_down"));
-        this.timeGame = new JCheckBox(Settings.lang("time_game_min"));
-        this.time4Game = new JComboBox(times);
+        
+        time = new Time();
 
         this.oponentComp = new JRadioButton(Settings.lang("against_computer"), false);
         this.oponentHuman = new JRadioButton(Settings.lang("against_other_human"), true);
@@ -228,13 +232,13 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
         this.add(upsideDown);
         this.gbc.gridy = 8;
         this.gbc.gridwidth = 1;
-        this.gbl.setConstraints(timeGame, gbc);
-        this.add(timeGame);
+        this.gbl.setConstraints(time.getTimeGame(), gbc);
+        this.add(time.getTimeGame());
         this.gbc.gridx = 1;
         this.gbc.gridy = 8;
         this.gbc.gridwidth = 1;
-        this.gbl.setConstraints(time4Game, gbc);
-        this.add(time4Game);
+        this.gbl.setConstraints(time.getTime4Game(), gbc);
+        this.add(time.getTime4Game());
         this.gbc.gridx = 1;
         this.gbc.gridy = 9;
         this.gbc.gridwidth = 0;

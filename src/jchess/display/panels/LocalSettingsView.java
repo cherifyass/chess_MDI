@@ -9,10 +9,13 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+
 import jchess.core.Game;
 import jchess.utils.Settings;
+import jchess.utils.Time;
 
 /**
  *
@@ -20,7 +23,9 @@ import jchess.utils.Settings;
  */
 public class LocalSettingsView extends JPanel implements ActionListener
 {
-    private JCheckBox isUpsideDown;
+	private JCheckBox isTime;
+	
+	private JCheckBox isUpsideDown;
     
     private JCheckBox isDisplayLegalMovesEnabled;
     
@@ -32,6 +37,8 @@ public class LocalSettingsView extends JPanel implements ActionListener
     
     private Game game;
     
+    Time time;
+    
     public LocalSettingsView(Game game)
     {
         this.game = game;
@@ -41,11 +48,14 @@ public class LocalSettingsView extends JPanel implements ActionListener
         
         this.setLayout(gbl);
         
+        initTimeSelection();
         initUpsideDownControl();
         initDisplayLegalMovesControl();
         initRenderLabelsControl();
         refreshCheckBoxesState();
     }
+    
+    
     
     private void initUpsideDownControl()
     {
@@ -86,6 +96,23 @@ public class LocalSettingsView extends JPanel implements ActionListener
         
         isRenderLabelsEnabled.addActionListener(this);        
     }
+    
+    private void initTimeSelection()
+    {
+    	time = new Time();      
+        
+    	this.gbc.gridx = 0;
+        this.gbc.gridy = 3;
+        this.gbl.setConstraints(time.getTimeGame(), gbc);
+        this.add(time.getTimeGame());
+        this.gbc.gridx = 1;
+        this.gbc.gridy = 3;
+        this.gbc.gridwidth = 1;
+        this.gbl.setConstraints(time.getTime4Game(), gbc);
+        this.add(time.getTime4Game());
+        
+        time.getTimeGame().addActionListener(this);
+    }
         
     private void refreshCheckBoxesState()
     {
@@ -100,6 +127,8 @@ public class LocalSettingsView extends JPanel implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
+    	String value;
+    	
         JCheckBox clickedComponent = (JCheckBox) e.getSource();
         if (clickedComponent == isUpsideDown)
         {
@@ -113,6 +142,14 @@ public class LocalSettingsView extends JPanel implements ActionListener
         {
             game.getSettings().setRenderLabels(isRenderLabelsEnabled.isSelected());
             game.resizeGame();
+        }
+        else if (clickedComponent == isTime) 
+        {
+            value = time.getTimes()[time.getTime4Game().getSelectedIndex()];//set time for game
+            Integer val = new Integer(value);
+            game.getSettings().setTimeForGame((int) val * 60);//set time for game and mult it to seconds
+            game.getGameClock().setTimes(game.getSettings().getTimeForGame(), game.getSettings().getTimeForGame());
+            game.getGameClock().start();
         }
         game.repaint();
     }

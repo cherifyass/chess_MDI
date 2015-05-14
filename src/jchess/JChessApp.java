@@ -18,6 +18,7 @@ package jchess;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
+import java.awt.PopupMenu;
 import java.awt.Window;
 import java.io.IOException;
 import java.util.Properties;
@@ -32,8 +33,8 @@ import jchess.core.Game;
 import jchess.core.Player;
 import jchess.display.windows.DrawLocalSettings;
 import jchess.utils.Settings;
-import org.apache.log4j.Logger;
 
+import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
@@ -79,6 +80,7 @@ public class JChessApp extends SingleFrameApplication {
         nomPl1+="_White";
         nomPl2+="_Black";     
         
+       
        demarrerJeu(nomPl1, nomPl2, true, false, false, false,"","",null);
 
     }
@@ -96,6 +98,7 @@ public class JChessApp extends SingleFrameApplication {
         Player pl1 = sett.getPlayerWhite();//set local player variable
         Player pl2 = sett.getPlayerBlack();//set local player variable
         sett.setGameMode(Settings.gameModes.newGame);
+        
         //if(this.firstName.getText().length() >9 ) this.firstName.setText(this.firstName.getText(0,8));
         
         //TODO: investigate and refactor
@@ -117,6 +120,7 @@ public class JChessApp extends SingleFrameApplication {
             pl2.setType(Player.playerTypes.computer);
         }
         sett.setUpsideDown(upsideDown);
+                
         if (timeGame) //if timeGame is checked
         {
             String value = valeur;//set time for game
@@ -131,7 +135,9 @@ public class JChessApp extends SingleFrameApplication {
                 + "\ntime 4 game: " + sett.getTimeForGame() + "\ntime limit set: " + sett.isTimeLimitSet()
                 + "\nwhite on top?: " + sett.isUpsideDown() + "\n****************");//4test
         
-        newGUI.newGame();//start new Game
+       newGUI.newGame();//start new Game
+        
+
         if(parent != null)
         	parent.setVisible(false);//hide parent
         JChessApp.getJavaChessView().getActiveTabGame().repaint();
