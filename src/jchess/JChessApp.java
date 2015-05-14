@@ -24,9 +24,12 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import jchess.core.Game;
@@ -79,8 +82,7 @@ public class JChessApp extends SingleFrameApplication {
         
         nomPl1+="_White";
         nomPl2+="_Black";     
-        
-       
+                
        demarrerJeu(nomPl1, nomPl2, true, false, false, false,"","",null);
 
     }

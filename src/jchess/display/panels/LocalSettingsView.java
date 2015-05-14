@@ -4,6 +4,7 @@
  */
 package jchess.display.panels;
 
+import java.awt.Button;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -36,6 +37,8 @@ public class LocalSettingsView extends JPanel implements ActionListener
     private GridBagLayout gbl;
     
     private Game game;
+    
+    private Button pret;
     
     Time time;
     
@@ -99,7 +102,8 @@ public class LocalSettingsView extends JPanel implements ActionListener
     
     private void initTimeSelection()
     {
-    	time = new Time();      
+    	time = new Time(); 
+    	pret = new Button("Pret ?");
         
     	this.gbc.gridx = 0;
         this.gbc.gridy = 3;
@@ -107,9 +111,12 @@ public class LocalSettingsView extends JPanel implements ActionListener
         this.add(time.getTimeGame());
         this.gbc.gridx = 1;
         this.gbc.gridy = 3;
-        this.gbc.gridwidth = 1;
         this.gbl.setConstraints(time.getTime4Game(), gbc);
         this.add(time.getTime4Game());
+        this.gbc.gridx = 0;
+        this.gbc.gridy = 4;
+        this.gbl.setConstraints(pret, gbc);
+        this.add(pret);
         
         time.getTimeGame().addActionListener(this);
     }
