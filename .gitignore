@@ -1,0 +1,4 @@
+/bin
+*.class
+bin/.gitignore
+bin/config.txt
