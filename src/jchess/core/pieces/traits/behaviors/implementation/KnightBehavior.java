@@ -65,6 +65,7 @@ public class KnightBehavior extends Behavior
             {pozX + 2, pozY - 1}, //5
             {pozX + 1, pozY - 2}, //6
             {pozX - 2, pozY - 1}, //7
+            {pozX - 1, pozY - 2}, //8
         };
         
         for(int[] squareCoordinates : squaresInRange)
