@@ -136,6 +136,8 @@ public class Moves extends AbstractTableModel
     {
         try
         {
+
+        	
             if (!this.enterBlack)
             {
                 this.addRow();
@@ -165,7 +167,10 @@ public class Moves extends AbstractTableModel
      * @param move String which in is capt player move
      */
     public void addMove(String move)
-    {
+    {   
+    	if (this.move.isEmpty())
+    		game.getGameClock().start();
+    	
         if (isMoveCorrect(move))
         {
             this.move.add(move);
@@ -179,6 +184,9 @@ public class Moves extends AbstractTableModel
     {
         boolean wasCastling = castlingMove != Castling.NONE;
         String locMove = begin.getPiece().getSymbol();
+        
+        if (this.move.isEmpty())
+    		game.getGameClock().start();
         
         if( game.getSettings().isUpsideDown() )
         {

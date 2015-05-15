@@ -154,7 +154,7 @@ public class JChessApp extends SingleFrameApplication {
             Integer val = new Integer(value);
             sett.setTimeForGame((int) val * 60);//set time for game and mult it to seconds
             newGUI.getGameClock().setTimes(sett.getTimeForGame(), sett.getTimeForGame());
-            newGUI.getGameClock().start();
+            //newGUI.getGameClock().start(); enclencher le décompte seulement après le 1er coup
         }
         LOG.debug("this.time4Game.getActionCommand(): " + time4Game);
         //this.time4Game.getComponent(this.time4Game.getSelectedIndex());

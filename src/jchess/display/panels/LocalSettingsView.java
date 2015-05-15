@@ -24,7 +24,6 @@ import jchess.utils.TimeFrame;
  */
 public class LocalSettingsView extends JPanel implements ActionListener
 {
-	private JCheckBox isTime;
 	
 	private JCheckBox isUpsideDown;
     
@@ -38,9 +37,6 @@ public class LocalSettingsView extends JPanel implements ActionListener
     
     private Game game;
     
-    private JButton pret;
-    
-    TimeFrame time;
     
     public LocalSettingsView(Game game)
     {
@@ -51,7 +47,6 @@ public class LocalSettingsView extends JPanel implements ActionListener
         
         this.setLayout(gbl);
         
-        initTimeSelection();
         initUpsideDownControl();
         initDisplayLegalMovesControl();
         initRenderLabelsControl();
@@ -100,27 +95,6 @@ public class LocalSettingsView extends JPanel implements ActionListener
         isRenderLabelsEnabled.addActionListener(this);        
     }
     
-    private void initTimeSelection()
-    {
-    	time = new TimeFrame(); 
-    	pret = new JButton("Pret ?");
-        
-    	this.gbc.gridx = 0;
-        this.gbc.gridy = 3;
-        this.gbl.setConstraints(time.getTimeGame(), gbc);
-        this.add(time.getTimeGame());
-        this.gbc.gridx = 1;
-        this.gbc.gridy = 3;
-        this.gbl.setConstraints(time.getTime4Game(), gbc);
-        this.add(time.getTime4Game());
-        this.gbc.gridx = 0;
-        this.gbc.gridy = 4;
-        this.gbl.setConstraints(pret, gbc);
-        this.add(pret);
-        
-        time.getTimeGame().addActionListener(this);
-        pret.addActionListener(this);
-    }
         
     private void refreshCheckBoxesState()
     {
@@ -152,16 +126,7 @@ public class LocalSettingsView extends JPanel implements ActionListener
             game.getSettings().setRenderLabels(isRenderLabelsEnabled.isSelected());
             game.resizeGame();
         }
-        else if (clickedComponent == isTime) 
-        {
-            value = time.getTimes()[time.getTime4Game().getSelectedIndex()];//set time for game
-            Integer val = new Integer(value);
-            game.getSettings().setTimeForGame((int) val * 60);//set time for game and mult it to seconds
-            game.getGameClock().setTimes(game.getSettings().getTimeForGame(), game.getSettings().getTimeForGame());
-            game.getGameClock().start();
-        }
-        if(clickedComponent2 == pret){
-        }
+
         game.repaint();
     }
     
