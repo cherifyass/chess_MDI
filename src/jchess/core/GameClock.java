@@ -169,18 +169,24 @@ public class GameClock extends JPanel implements Runnable
 
     /** Method of swiching the players clocks
      */
-    public void switchClocks()
+    public int switchClocks()
     {
+    	int moveTime = 0;
         /*in documentation this method is called 'switch', but it's restricted name
         to switch block (in pascal called "case") - this've to be repaired in documentation by Wąsu:P*/
         if (this.runningClock == this.clock1)
         {
+        	this.clock2.init(settings.getTimeForGame());
+        	moveTime = settings.getTimeForGame() - (this.clock1.getLeftTime());
             this.runningClock = this.clock2;
         }
         else
         {
+        	this.clock1.init(settings.getTimeForGame());
+        	moveTime = settings.getTimeForGame() - this.clock2.getLeftTime();
             this.runningClock = this.clock1;
         }
+        return moveTime;
     }
 
     /** Method with is setting the players clocks time

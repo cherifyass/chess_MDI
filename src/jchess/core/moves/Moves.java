@@ -141,6 +141,8 @@ public class Moves extends AbstractTableModel
      */
     protected void addMove2Table(String str)
     {
+    	String strWTime = str;
+    	strWTime += ": "+game.moveTime;
         try
         {
 
@@ -149,11 +151,11 @@ public class Moves extends AbstractTableModel
             {
                 this.addRow();
                 this.rowsNum = this.tableModel.getRowCount() - 1;
-                this.tableModel.setValueAt(str, rowsNum, 0);
+                this.tableModel.setValueAt(strWTime, rowsNum, 0);
             }
             else
             {
-                this.tableModel.setValueAt(str, rowsNum, 1);
+                this.tableModel.setValueAt(strWTime, rowsNum, 1);
                 this.rowsNum = this.tableModel.getRowCount() - 1;
             }
             this.enterBlack = !this.enterBlack;
@@ -165,7 +167,7 @@ public class Moves extends AbstractTableModel
             if (this.rowsNum > 0)
             {
                 this.rowsNum--;
-                addMove2Table(str);
+                addMove2Table(strWTime);
             }
         }
     }
@@ -187,7 +189,8 @@ public class Moves extends AbstractTableModel
 
     }
 
-    public void addMove(Square begin, Square end, boolean registerInHistory, Castling castlingMove, boolean wasEnPassant, Piece promotedPiece)
+    public void addMove(Square begin, Square end, boolean registerInHistory, 
+    		Castling castlingMove, boolean wasEnPassant, Piece promotedPiece)
     {
         boolean wasCastling = castlingMove != Castling.NONE;
         String locMove = begin.getPiece().getSymbol();

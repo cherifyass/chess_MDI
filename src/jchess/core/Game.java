@@ -89,6 +89,8 @@ public class Game extends JPanel implements ComponentListener, MouseListener
     protected JTabbedPane tabPane;
    
     protected LocalSettingsView localSettingsView;
+    
+    public static int moveTime = 0;
 
     public Game()
     {
@@ -333,7 +335,8 @@ public class Game extends JPanel implements ComponentListener, MouseListener
             activePlayer = getSettings().getPlayerWhite();
         }
 
-        this.getGameClock().switchClocks();
+        moveTime = this.getGameClock().switchClocks();
+        System.out.println("moveTime:" + moveTime);
     }
 
     /** Method of getting accualy active player
