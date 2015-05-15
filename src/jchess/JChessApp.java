@@ -18,25 +18,24 @@ package jchess;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
-import java.awt.PopupMenu;
 import java.awt.Window;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
+
+
+
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 
 import jchess.core.Game;
 import jchess.core.Player;
 import jchess.display.windows.DrawLocalSettings;
 import jchess.utils.Settings;
 import jchess.utils.TimeFrame;
+
+import jchess.visitor.Calculateur;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -109,7 +108,7 @@ public class JChessApp extends SingleFrameApplication {
         }
         
        demarrerJeu(nomPl1, nomPl2, true, false, false, false,"","",null);
-
+      
     }
 
     /**
@@ -165,6 +164,8 @@ public class JChessApp extends SingleFrameApplication {
        newGUI.newGame();//start new Game
         
 
+
+	   
         if(parent != null)
         	parent.setVisible(false);//hide parent
         JChessApp.getJavaChessView().getActiveTabGame().repaint();

@@ -24,20 +24,27 @@ import jchess.core.Chessboard;
 import jchess.core.Game;
 import jchess.core.Player;
 import jchess.core.pieces.Piece;
+
 import java.util.ArrayList;
 import java.util.Stack;
 import java.awt.Point;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.*;
+
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.EmptyStackException;
 import java.util.Set;
+
 import javax.swing.JOptionPane;
+
 import jchess.core.Colors;
 import jchess.utils.Settings;
+import jchess.visitor.Calculateur;
 import jchess.core.Square;
+
 import org.apache.log4j.Logger;
 
 /** Class representing the players moves, it's also checking
@@ -185,8 +192,15 @@ public class Moves extends AbstractTableModel
         boolean wasCastling = castlingMove != Castling.NONE;
         String locMove = begin.getPiece().getSymbol();
         
+        Calculateur calculateur = new Calculateur();
+        
+ 	   	System.out.println(calculateur.m2(game));
+ 	   
+        //Déclenchement du temps au premier coup
         if (this.move.isEmpty()&&game.getSettings().isTimeLimitSet()==true)
     		game.getGameClock().start();
+        
+        
         
         if( game.getSettings().isUpsideDown() )
         {
