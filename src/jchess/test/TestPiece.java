@@ -9,8 +9,10 @@ import jchess.core.moves.Moves;
 import jchess.core.pieces.Piece;
 import jchess.core.pieces.implementation.Bishop;
 import jchess.core.pieces.implementation.King;
+import jchess.core.pieces.implementation.Knight;
 import jchess.core.pieces.implementation.Pawn;
 import jchess.utils.Settings;
+
 import org.jdesktop.application.SingleFrameApplication;
 import org.junit.Before;
 import org.junit.Test;
@@ -145,6 +147,33 @@ public class TestPiece {
         assertEquals(Colors.WHITE, b1.getPlayer().getColor());
 
         assertEquals(5, b1.getAllMoves().size());
+
+
+    }
+    
+    @Test
+    public void testKnight() throws Exception {
+
+    	//g1(6,7) -> f3(5,5)
+    	board.move(6, 7, 5, 5);
+    	
+    	//d7(3,1) -> d6(3,2) 
+    	board.move(3, 1, 3, 2);
+    	
+    	//f3(5,5) -> e5(4,3)
+    	board.move(5, 5, 4, 3);
+    	
+    	//d6(3,2) -> d5(3,3)
+    	board.move(3, 2, 3, 3);
+    	
+    	
+        // Knight in c1
+        Piece k1 = board.getSquare(4, 3).getPiece();
+        assertTrue(k1 instanceof Knight);
+        assertEquals(Colors.WHITE, k1.getPlayer().getColor());
+
+        //Test de toutes les positions possibles du cavalier soient 8 au total
+        assertEquals(8, k1.getAllMoves().size());
 
 
     }
