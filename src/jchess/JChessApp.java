@@ -36,6 +36,7 @@ import jchess.core.Game;
 import jchess.core.Player;
 import jchess.display.windows.DrawLocalSettings;
 import jchess.utils.Settings;
+import jchess.utils.TimeFrame;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -82,13 +83,37 @@ public class JChessApp extends SingleFrameApplication {
         
         nomPl1+="_White";
         nomPl2+="_Black";     
-                
+        
+        /**
+         *  Pop up demandant le temps
+         */
+        TimeFrame timeFrame = new TimeFrame();
+        String popUpTitle = "Temps de la partie";
+        String popUpDescription = "Veuillez choisir le temps de la partie";
+        String initialValue = timeFrame.getTimes()[0];
+        
+        // first null because no parent, 2nd null because no icon
+        String s = (String)JOptionPane.showInputDialog(
+                            null,
+                            popUpDescription,
+                            popUpTitle,
+                            JOptionPane.PLAIN_MESSAGE,
+                            null,
+                            timeFrame.getTimes(),
+                            initialValue);
+
+        //If a string was returned
+        if ((s != null) && (s.length() > 0)) {
+        	demarrerJeu(nomPl1, nomPl2, true, false, false, true,s,s,null);
+        	return;
+        }
+        
        demarrerJeu(nomPl1, nomPl2, true, false, false, false,"","",null);
 
     }
 
     /**
-     * Méthode pour démarrer un jeu automatique avec 2 joueur en local
+     * Mï¿½thode pour dï¿½marrer un jeu automatique avec 2 joueur en local
      */
     public static void demarrerJeu(String name1, String name2, Boolean color, Boolean oponentComp, 
     		Boolean upsideDown, Boolean timeGame,String valeur, String time4Game , JDialog parent){

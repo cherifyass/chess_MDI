@@ -3,7 +3,7 @@ package jchess.utils;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
-public class Time {
+public class TimeFrame {
 	
     JCheckBox timeGame;
    
@@ -15,7 +15,7 @@ public class Time {
         "1", "3", "5", "8", "10", "15", "20", "25", "30", "60", "120"
     };
     
-    public Time(){
+    public TimeFrame(){
         this.timeGame = new JCheckBox(Settings.lang("Temps"));
         this.time4Game = new JComboBox(times);
     }

@@ -30,7 +30,7 @@ import java.awt.*;
 import javax.swing.text.BadLocationException;
 
 import jchess.utils.Settings;
-import jchess.utils.Time;
+import jchess.utils.TimeFrame;
 
 import org.apache.log4j.Logger;
 
@@ -67,9 +67,9 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
         Settings.lang("white"), Settings.lang("black")
     };
     
-    //Ajout d'une classe Time permettant les réglages du temps de partie
+    //Ajout d'une classe Time permettant les rï¿½glages du temps de partie
     
-    Time time;
+    TimeFrame time;
         
     /** 
      * Method witch is checking correction of edit tables
@@ -175,7 +175,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
         this.computerLevel = new JSlider();
         this.upsideDown = new JCheckBox(Settings.lang("upside_down"));
         
-        time = new Time();
+        time = new TimeFrame();
 
         this.oponentComp = new JRadioButton(Settings.lang("against_computer"), false);
         this.oponentHuman = new JRadioButton(Settings.lang("against_other_human"), true);
