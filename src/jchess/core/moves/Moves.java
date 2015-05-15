@@ -185,7 +185,7 @@ public class Moves extends AbstractTableModel
         boolean wasCastling = castlingMove != Castling.NONE;
         String locMove = begin.getPiece().getSymbol();
         
-        if (this.move.isEmpty())
+        if (this.move.isEmpty()&&game.getSettings().isTimeLimitSet()==true)
     		game.getGameClock().start();
         
         if( game.getSettings().isUpsideDown() )
